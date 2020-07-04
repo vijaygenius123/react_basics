@@ -40,27 +40,33 @@
     <div id="root"></div>
     <script type="text/babel">
         const rootElement = document.getElementById('root');
+        const state = { eventCount: 0 }
+        function App() {
 
-        function Box({ className, size, ...rest }) {
-            const classSizeName = size ? `box--${size}` : '';
-            const props = {
-                className: `box ${className} ${classSizeName}`,
-                ...rest
+            function handleClick(event) {
+                setState({ eventCount: state.eventCount + 1 })
             }
+
             return (
-                <div {...props} />
+                <div>
+                    <p>There have been {state.eventCount} click events</p>
+                    <button onClick={handleClick}>Clicke Me </button>
+                </div>
             )
+
+
         }
 
-        const element = (
-            <div>
-                <Box size="small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</Box>
-                <Box size="medium" style={{ backgroundColor: 'pink' }}>medium pink box</Box>
-                <Box size="large" style={{ backgroundColor: 'orange' }}>large orange box</Box>
-            </div>
-        )
+        function setState(newState) {
+            Object.assign(state, newState)
+            renderApp()
+        }
 
-        ReactDOM.render(element, rootElement)
+        function renderApp() {
+            ReactDOM.render(<App />, rootElement)
+        }
+
+        renderApp()
     </script>
 </body>
 
