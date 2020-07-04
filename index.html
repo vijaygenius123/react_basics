@@ -17,19 +17,19 @@
     <script type="text/babel">
         const rootElement = document.getElementById('root');
 
-        function SayHello({ firstname, lastname }) {
+        function CharacterCount({ text }) {
+            const length = text.length ? text.length : 'No'
             return (
                 <div>
-                    Hello {firstname} {lastname}
+                    {`The text "${text}"`}  has <strong>{length}</strong> characters
                 </div>
             )
         }
-        SayHello.propTypes = {
-            firstname: PropTypes.string.isRequired,
-            lastname: PropTypes.string.isRequired
-        }
 
-        const element = <SayHello firstname="Vijay" />
+        const element = < >
+            <CharacterCount text="Hello World" />
+            <CharacterCount text="" />
+        </>
 
         ReactDOM.render(element, rootElement)
     </script>
