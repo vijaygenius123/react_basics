@@ -41,11 +41,17 @@
     <script type="text/babel">
         const rootElement = document.getElementById('root');
 
+        function Box({ className, ...rest }) {
+            return (
+                <div className={`box ${className}`} {...rest} />
+            )
+        }
+
         const element = (
             <div>
-                <div className="box box--small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</div>
-                <div className="box box--medium" style={{ backgroundColor: 'pink' }}>medium pink box</div>
-                <div className="box box--large" style={{ backgroundColor: 'orange' }}>large orange box</div>
+                <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</Box>
+                <Box className="box--medium" style={{ backgroundColor: 'pink' }}>medium pink box</Box>
+                <Box className="box--large" style={{ backgroundColor: 'orange' }}>large orange box</Box>
             </div>
         )
 
