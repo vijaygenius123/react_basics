@@ -18,12 +18,15 @@
     <div id="root"></div>
     <script type="text/babel">
         function Greeting() {
-            const [name, setName] = React.useState(window.localStorage.getItem('name') || '')
+            const [name, setName] = React.useState(() => {
+                console.log('On Load')
+                return window.localStorage.getItem('name') || ''
+            })
 
             React.useEffect(() => {
                 window.localStorage.setItem('name', name)
             })
-
+            console.log('Rendered')
             const handleChange = e => setName(e.target.value)
             return (
                 <div>
