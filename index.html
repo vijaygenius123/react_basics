@@ -17,17 +17,22 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        function Greeting() {
-            const [name, setName] = React.useState(() => {
-                console.log('On Load')
-                return window.localStorage.getItem('name') || ''
+
+        function localStorageHook(key, defaultValue = '') {
+            const [state, setState] = React.useState(() => {
+                return window.localStorage.getItem(key) || defaultValue
             })
 
             React.useEffect(() => {
-                console.log('Calling useEffect')
-                window.localStorage.setItem('name', name)
-            }, [name])
-            console.log('Rendered')
+                window.localStorage.setItem(key, state)
+            }, [state])
+
+            return [state, setState]
+        }
+
+        function Greeting() {
+            const [name, setName] = localStorageHook('name')
+
             const handleChange = e => setName(e.target.value)
             return (
                 <div>
