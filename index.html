@@ -24,8 +24,9 @@
             })
 
             React.useEffect(() => {
+                console.log('Calling useEffect')
                 window.localStorage.setItem('name', name)
-            })
+            }, [name])
             console.log('Rendered')
             const handleChange = e => setName(e.target.value)
             return (
@@ -38,7 +39,19 @@
                 </div>
             )
         }
-        ReactDOM.render(<Greeting />, document.getElementById('root'));
+
+        function App() {
+            const [count, setCount] = React.useState(0)
+
+            return (
+                <>
+                    <div onClick={e => setCount(count + 1)}>{count}</div>
+                    <Greeting />
+                </>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 
